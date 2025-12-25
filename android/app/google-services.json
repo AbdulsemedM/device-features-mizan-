@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "986774470752",
+    "project_id": "mizan-test",
+    "storage_bucket": "mizan-test.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986774470752:android:be54648fc0269db91c8305",
+        "android_client_info": {
+          "package_name": "com.example.tests"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDNsHX-lMf6NMOxNsqlVWX2-8iTA70JPL0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

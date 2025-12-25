@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tests/screens/camera_image_screen.dart';
 import 'package:tests/screens/files_system.dart';
 import 'package:tests/screens/location_map_screen.dart';
 import 'package:tests/screens/push_notification.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const DeviceFeatures());
 }
 
