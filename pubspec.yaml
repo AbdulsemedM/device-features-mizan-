@@ -39,6 +39,7 @@ dependencies:
   http: ^1.2.0
   firebase_core: ^2.13.0
   firebase_messaging: ^14.6.6
+  path_provider: ^2.0.15
 
 dev_dependencies:
   flutter_test:
