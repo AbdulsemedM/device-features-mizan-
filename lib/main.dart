@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:tests/screens/camera_image_screen.dart';
 import 'package:tests/screens/files_system.dart';
 import 'package:tests/screens/location_map_screen.dart';
+import 'package:tests/screens/login_screen.dart';
 import 'package:tests/screens/push_notification.dart';
+import 'package:tests/screens/signup_screen.dart';
+import 'package:tests/services/auth_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +22,32 @@ class DeviceFeatures extends StatelessWidget {
     return MaterialApp(
       title: 'Device Features',
       theme: ThemeData(primarySwatch: Colors.blue),
-      home: HomePage(),
+      routes: {
+        '/login': (context) => const LoginScreen(),
+        '/signup': (context) => const SignupScreen(),
+      },
+      home: AuthWrapper(),
+    );
+  }
+}
+
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final authService = AuthService();
+    return StreamBuilder(
+      stream: authService.authStateChange,
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return Scaffold(body: Center(child: CircularProgressIndicator()));
+        }
+        if (snapshot.hasData && snapshot.data != null) {
+          return HomePage();
+        }
+        return LoginScreen();
+      },
     );
   }
 }
