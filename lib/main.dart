@@ -38,7 +38,7 @@ class AuthWrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     final authService = AuthService();
     return StreamBuilder(
-      stream: authService.authStateChange,
+      stream: authService.authStateChanges,
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(body: Center(child: CircularProgressIndicator()));
@@ -54,7 +54,7 @@ class AuthWrapper extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
-
+  final _authService = AuthService();
   final screens = [
     ("Camera and Image", CameraImageScreen()),
     ("Location and Map", LocationMapScreen()),
@@ -65,7 +65,22 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Device Features')),
+      appBar: AppBar(
+        title: const Text('Device Features'),
+        actions: [
+          IconButton(
+            onPressed: () async {
+              await _authService.signout();
+              if (context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(content: Text("Signed out successfully")),
+                );
+              }
+            },
+            icon: Icon(Icons.logout),
+          ),
+        ],
+      ),
       body: ListView.builder(
         itemCount: 4,
         itemBuilder: (context, index) {
